@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebView Test</title>
+</head>
+<body>
+    <h1>Hello from HTML</h1>
+    <p id="responseCount">Получено ответов: 0</p>
+
+    <script>
+        let responseCount = 0;
+        
+        function appStart() {
+            window.webkit.messageHandlers.nativeapp.postMessage([0, "app.start", {}]);
+        }
+
+        function sendMessageToNative() {
+            responseCount += 1;
+            let event = responseCount % 2 ? "loader.show" : "loader.hide";
+            let data = {};
+            window.webkit.messageHandlers.nativeapp.postMessage([responseCount, event, data]);
+        }
+
+        function _nativeapp_receive(requestID, event, response) {
+            
+            const responseElement = document.getElementById("responseCount");
+            responseElement.innerText = 'Получено ответов: ' + responseCount;
+            console.log("Получен ответ от native app: ", requestID, response);
+        }
+
+        setInterval(sendMessageToNative, 1000);
+        
+        appStart()
+        
+    </script>
+</body>
+</html>

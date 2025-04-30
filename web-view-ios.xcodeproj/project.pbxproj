@@ -30,6 +30,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4B7BC4572DC2BBF400711C8D /* Exceptions for "web-view-ios" folder in "web-view-iosTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				html/index.html,
+			);
+			target = 4B8E277E2DC1771700E971F0 /* web-view-iosTests */;
+		};
+		4B7BC4582DC2BBF400711C8D /* Exceptions for "web-view-ios" folder in "web-view-iosUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				html/index.html,
+			);
+			target = 4B8E27882DC1771700E971F0 /* web-view-iosUITests */;
+		};
 		4B8E27912DC1771700E971F0 /* Exceptions for "web-view-ios" folder in "web-view-ios" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -44,6 +58,8 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				4B8E27912DC1771700E971F0 /* Exceptions for "web-view-ios" folder in "web-view-ios" target */,
+				4B7BC4572DC2BBF400711C8D /* Exceptions for "web-view-ios" folder in "web-view-iosTests" target */,
+				4B7BC4582DC2BBF400711C8D /* Exceptions for "web-view-ios" folder in "web-view-iosUITests" target */,
 			);
 			path = "web-view-ios";
 			sourceTree = "<group>";
@@ -292,11 +308,12 @@
 				DEVELOPMENT_TEAM = 3NH25ZBR74;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "web-view-ios/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Web View";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -320,11 +337,12 @@
 				DEVELOPMENT_TEAM = 3NH25ZBR74;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "web-view-ios/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Web View";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
