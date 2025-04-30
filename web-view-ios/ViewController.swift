@@ -85,7 +85,7 @@ extension App: WKScriptMessageHandler {
                 case "loader.show":
                     loaderShow()
                 case "loader.hide":
-                    self.loaderApp.hide()
+                    loaderHide()
                 default:
                     print("unknown event")
                     break
@@ -93,7 +93,7 @@ extension App: WKScriptMessageHandler {
 
                 let response = "Ответ от native app"
                 let jsCode =
-                    "window._nativeapp_receive(\(requestID), '\(response)')"
+                    "window._nativeapp_receive(\(requestID), '\(event)', '\(response)')"
                 webView.evaluateJavaScript(jsCode, completionHandler: nil)
             }
         }
