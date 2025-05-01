@@ -2,6 +2,8 @@ import UIKit
 import WebKit
 
 class App: UIViewController {
+    
+    var modalManager = ModalManager()
 
     var webView: WKWebView!
     var loaderApp: LoaderView!
@@ -86,6 +88,14 @@ extension App: WKScriptMessageHandler {
                     loaderShow()
                 case "loader.hide":
                     loaderHide()
+                case "camera.qr":
+                    cameraQR()
+                case "taptic.impact":
+                    tapticImpact(data)
+                case "taptic.notification":
+                    tapticNotification(data)
+                case "taptic.selection":
+                    tapticSelection()
                 default:
                     print("unknown event")
                     break
