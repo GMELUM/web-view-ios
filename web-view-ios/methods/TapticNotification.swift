@@ -21,8 +21,8 @@ extension App {
         }
     }
     
-    func tapticNotification(_ data: Any) {
-        guard let dataDict = data as? [String: String],
+    func tapticNotification(r: Int, e: String, d: Any) {
+        guard let dataDict = d as? [String: String],
               let typeString = dataDict["type"],
               let type = NotificationType(rawValue: typeString) else {
             print("Invalid data format or unsupported type")
@@ -32,5 +32,7 @@ extension App {
         let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
         notificationFeedbackGenerator.prepare()
         notificationFeedbackGenerator.notificationOccurred(type.feedbackType)
+        
+        sendResponse(requestID: r, event: e, data: ["success": true])
     }
 }

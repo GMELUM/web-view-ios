@@ -33,11 +33,13 @@ extension App {
     // display logic for the loader, facilitating easier maintenance
     // and enabling consistent behavior across various parts of the
     // app where the loader may be needed.
-    func loaderShow() {
+    func loaderShow(r: Int, e: String, d: Any) {
         // Invokes the show method on the loaderApp instance.
         // This call will likely encompass functionality to animate
         // the loader’s appearance and attach it to the main view
         // of the app, ensuring it is visible to the user.
-        self.loaderApp.show(on: self.view)
+        loaderApp.show(on: self.view)
+        
+        sendResponse(requestID: r, event: e, data: ["success": true])
     }
 }

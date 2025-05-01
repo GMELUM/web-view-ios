@@ -11,7 +11,7 @@
         body {
             margin: 0;
             padding-top: var(--safe-area-inset-top);
-            padding-bottom: var(----safe-area-inset-bottom);
+            padding-bottom: var(--safe-area-inset-bottom);
             font-family: -apple-system, system-ui, Helvetica Neue, Roboto, sans-serif;
         }
 
@@ -67,25 +67,31 @@
             font-weight: bold;
             font-variant: all-small-caps;
         }
-        
+
         @supports (padding-top: constant(safe-area-inset-top)) {
-          :root {
-            --safe-area-inset-top: constant(safe-area-inset-top);
-            --safe-area-inset-right: constant(safe-area-inset-right);
-            --safe-area-inset-bottom: constant(safe-area-inset-bottom);
-            --safe-area-inset-left: constant(safe-area-inset-left);
-          }
+            :root {
+                --safe-area-inset-top: constant(safe-area-inset-top);
+                --safe-area-inset-right: constant(safe-area-inset-right);
+                --safe-area-inset-bottom: constant(safe-area-inset-bottom);
+                --safe-area-inset-left: constant(safe-area-inset-left);
+            }
         }
 
         @supports (padding-top: env(safe-area-inset-top)) {
-          :root {
-            --safe-area-inset-top: env(safe-area-inset-top);
-            --safe-area-inset-right: env(safe-area-inset-right);
-            --safe-area-inset-bottom: env(safe-area-inset-bottom);
-            --safe-area-inset-left: env(safe-area-inset-left);
-          }
+            :root {
+                --safe-area-inset-top: env(safe-area-inset-top);
+                --safe-area-inset-right: env(safe-area-inset-right);
+                --safe-area-inset-bottom: env(safe-area-inset-bottom);
+                --safe-area-inset-left: env(safe-area-inset-left);
+            }
         }
-        
+
+        input {
+            width: calc(100% - 20px);
+            margin: 6px 0;
+            padding: 8px;
+            font-size: 14px;
+        }
     </style>
 
 </head>
@@ -111,6 +117,17 @@
         <button id="tapticErrorButton">ERROR NOTIFICATION</button>
 
         <button id="tapticSelectionButton">SELECTION CHANGE</button>
+
+    </div>
+
+    <div class="header">STORAGE</div>
+    <div class="group">
+        <span id="storageOutput">Count: 0</span>
+<!--        <input id="storageKey" placeholder="Enter Key" />-->
+        <button id="storageSetButton">Storage Set</button>
+        <button id="storageGetButton">Storage Get</button>
+        <button id="storageDeleteButton">Storage Delete</button>
+        <button id="storageKeysButton">Storage Keys</button>
 
     </div>
 
@@ -167,9 +184,55 @@
             }, 1000)
         });
 
+        let count = 0;
+
+        const updateOutput = (value) => {
+            const output = document.getElementById('storageOutput');
+            if (output) {
+                output.textContent = value;
+            }
+        };
+
+        document.getElementById("storageSetButton").addEventListener("click", function () {
+            const key = "count";
+            if (key) {
+                count += 1;
+                window.webkit.messageHandlers.nativeapp.postMessage([0, "storage.set", {
+                    key: key,
+                    value: count.toString()
+                }]);
+                updateOutput('Count: ' + count);
+            }
+        });
+
+        document.getElementById("storageGetButton").addEventListener("click", function () {
+            const key = "count";
+            if (key) {
+                window.webkit.messageHandlers.nativeapp.postMessage([0, "storage.get", {
+                    key: key
+                }]);
+            }
+        });
+
+        document.getElementById("storageDeleteButton").addEventListener("click", function () {
+            const key = "count";
+            if (key) {
+                window.webkit.messageHandlers.nativeapp.postMessage([0, "storage.delete", {key: key}]);
+            }
+        });
+
+        document.getElementById("storageKeysButton").addEventListener("click", function () {
+            window.webkit.messageHandlers.nativeapp.postMessage([0, "storage.keys", {}]);
+        });
+
         function _nativeapp_receive(requestID, event, response) {
-            const responseElement = document.getElementById("responseCount");
             console.log("Получен ответ от native app: ", requestID, response);
+            const parsedResponse = typeof response === "string" ? JSON.parse(response) : response;
+            if (event === "storage.get" && parsedResponse && parsedResponse.response) {
+                updateOutput('Count: ' + parsedResponse.response["count"]);
+            } else if (event === "storage.keys" && parsedResponse && parsedResponse.response) {
+                updateOutput('Keys: ' + parsedResponse.response.keys.join(', '));
+            }
         }
 
         window.webkit.messageHandlers.nativeapp.postMessage([0, "app.start", {}]);

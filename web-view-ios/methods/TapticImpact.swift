@@ -22,8 +22,8 @@ extension App {
         }
     }
 
-    func tapticImpact(_ data: Any) {
-        guard let dataDict = data as? [String: String],
+    func tapticImpact(r: Int, e: String, d: Any) {
+        guard let dataDict = d as? [String: String],
             let styleString = dataDict["style"],
             let style = ImpactStyle(rawValue: styleString)
         else {
@@ -36,5 +36,8 @@ extension App {
         )
         impactFeedbackGenerator.prepare()
         impactFeedbackGenerator.impactOccurred()
+
+        sendResponse(requestID: r, event: e, data: ["success": true])
+
     }
 }

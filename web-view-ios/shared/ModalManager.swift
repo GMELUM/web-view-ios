@@ -7,11 +7,14 @@
 
 import UIKit
 
-protocol ManagedModal: UIViewController {
+/// Протокол для управления модальными окнами
+protocol ManagedModal: UIViewController, UIAdaptivePresentationControllerDelegate {
     func configure(with manager: ModalManager)
 }
 
+/// Класс для управления модальными окнами
 class ModalManager {
+    
     private var isModalPresented = false
     private var completion: ((Any?) -> Void)?
     

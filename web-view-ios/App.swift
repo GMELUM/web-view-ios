@@ -2,8 +2,9 @@ import UIKit
 import WebKit
 
 class App: UIViewController {
-    
+
     var modalManager = ModalManager()
+    var storageManager = StorageManager()
 
     var webView: WKWebView!
     var loaderApp: LoaderView!
@@ -54,7 +55,6 @@ class App: UIViewController {
             ),
         ])
 
-        // Загружаем локальный HTML файл из папки html
         if let filePath = Bundle.main.url(
             forResource: "index",
             withExtension: "html"
@@ -82,30 +82,85 @@ extension App: WKScriptMessageHandler {
                 let data = messageBody[2]
 
                 switch event {
+
                 case "app.start":
-                    appStart()
+                    appStart(r: requestID, e: event, d: data)
                 case "loader.show":
-                    loaderShow()
+                    loaderShow(r: requestID, e: event, d: data)
                 case "loader.hide":
-                    loaderHide()
+                    loaderHide(r: requestID, e: event, d: data)
                 case "camera.qr":
-                    cameraQR()
+                    cameraQR(r: requestID, e: event, d: data)
+
                 case "taptic.impact":
-                    tapticImpact(data)
+                    tapticImpact(r: requestID, e: event, d: data)
                 case "taptic.notification":
-                    tapticNotification(data)
+                    tapticNotification(r: requestID, e: event, d: data)
                 case "taptic.selection":
-                    tapticSelection()
+                    tapticSelection(r: requestID, e: event, d: data)
+
+                case "storage.get":
+                    storageGet(r: requestID, e: event, d: data)
+                case "storage.set":
+                    storageSet(r: requestID, e: event, d: data)
+                case "storage.delete":
+                    storageDelete(r: requestID, e: event, d: data)
+                case "storage.keys":
+                    storageKeys(r: requestID, e: event, d: data)
+
                 default:
-                    print("unknown event")
-                    break
+                    sendError(
+                        requestID: requestID,
+                        event: event,
+                        key: "UNKNOWN_EVENT",
+                        message: "unknown event"
+                    )
                 }
 
-                let response = "Ответ от native app"
-                let jsCode =
-                    "window._nativeapp_receive(\(requestID), '\(event)', '\(response)')"
-                webView.evaluateJavaScript(jsCode, completionHandler: nil)
             }
         }
     }
+
+    func sendResponse(requestID: Int, event: String, data: Any) {
+        let responseData: [String: Any] = ["response": data]
+
+        do {
+            let jsonData = try JSONSerialization.data(
+                withJSONObject: responseData,
+                options: []
+            )
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                let jsCode =
+                    "window._nativeapp_receive(\(requestID), '\(event)', \(jsonString))"
+                
+                print(jsCode)
+                webView.evaluateJavaScript(jsCode, completionHandler: nil)
+            }
+        } catch {
+            print("Failed to serialize response JSON: \(error)")
+        }
+    }
+
+    func sendError(requestID: Int, event: String, key: String, message: String)
+    {
+        let errorData: [String: Any] = [
+            "error": ["key": key, "message": message]
+        ]
+
+        do {
+            let jsonData = try JSONSerialization.data(
+                withJSONObject: errorData,
+                options: []
+            )
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                let jsCode =
+                    "window._nativeapp_receive(\(requestID), '\(event)', \(jsonString))"
+                print(jsCode)
+                webView.evaluateJavaScript(jsCode, completionHandler: nil)
+            }
+        } catch {
+            print("Failed to serialize error JSON: \(error)")
+        }
+    }
+
 }

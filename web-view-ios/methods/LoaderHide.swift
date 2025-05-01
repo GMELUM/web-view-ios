@@ -26,11 +26,13 @@ extension App {
     // transition from the loading screen to the content screen.
     // This method acts as a single point of control for hiding
     // the loader, making the codebase easier to manage and debug.
-    func loaderHide() {
+    func loaderHide(r: Int, e: String, d: Any) {
         // Calls the hide method on the loaderApp instance.
         // This method should perform tasks such as animations to
         // fade out the loader view before removing it from the
         // superview, ensuring a smooth transition for the user.
-        self.loaderApp.hide()
+        loaderApp.hide()
+        
+        sendResponse(requestID: r, event: e, data: ["success": true])
     }
 }

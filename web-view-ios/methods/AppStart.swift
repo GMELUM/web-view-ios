@@ -6,8 +6,10 @@
 //
 
 extension App {
-    func appStart() {
+    func appStart(r: Int, e: String, d: Any) {
         // TODO: Processing in start app
-        self.loaderApp.hide()
+        loaderApp.hide()
+
+        sendResponse(requestID: r, event: e, data: ["success": true])
     }
 }

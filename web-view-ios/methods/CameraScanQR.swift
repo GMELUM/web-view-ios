@@ -6,11 +6,15 @@
 //
 
 extension App {
-    func cameraQR() {
+    func cameraQR(r: Int, e: String, d: Any) {
         let modalVC = ModalViewController()
         modalManager.open(modal: modalVC, from: self) { data in
             if let result = data as? String {
-                print("Received data from modal: \(result)")
+                self.sendResponse(
+                    requestID: r,
+                    event: e,
+                    data: ["text": result]
+                )
             }
         }
     }
