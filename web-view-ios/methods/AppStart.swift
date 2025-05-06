@@ -7,7 +7,16 @@
 
 extension App {
     func appStart(r: Int, e: String, d: Any) {
-        // TODO: Processing in start app
+        
+        sendResponse(
+            requestID: 0,
+            event: "system.update",
+            data: [
+                "language": getLanguage(),
+                "scheme": getScheme(),
+            ]
+        )
+
         loaderApp.hide()
 
         sendResponse(requestID: r, event: e, data: ["success": true])

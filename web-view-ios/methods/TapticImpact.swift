@@ -12,6 +12,7 @@ extension App {
         case light, medium, heavy, soft, rigid
 
         var feedbackStyle: UIImpactFeedbackGenerator.FeedbackStyle {
+            print(self)
             switch self {
             case .light: return .light
             case .medium: return .medium
@@ -23,6 +24,7 @@ extension App {
     }
 
     func tapticImpact(r: Int, e: String, d: Any) {
+        
         guard let dataDict = d as? [String: String],
             let styleString = dataDict["style"],
             let style = ImpactStyle(rawValue: styleString)
