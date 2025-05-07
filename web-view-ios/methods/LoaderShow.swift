@@ -17,7 +17,7 @@
 // that includes the web view and associated UI components, like
 // the loader.
 extension App {
-    
+
     // The loaderShow() method is responsible for displaying the
     // loading screen (loaderApp). This function leverages the
     // show method defined on loaderApp, which handles adding
@@ -28,7 +28,7 @@ extension App {
     // loading. It provides users with a visual indication that
     // a process is occurring, thereby improving user experience
     // by preventing any confusion during content preparation.
-    
+
     // This method provides a centralized location to control the
     // display logic for the loader, facilitating easier maintenance
     // and enabling consistent behavior across various parts of the
@@ -39,7 +39,12 @@ extension App {
         // the loader’s appearance and attach it to the main view
         // of the app, ensuring it is visible to the user.
         loaderApp.show(on: self.view)
-        
-        sendResponse(requestID: r, event: e, data: ["success": true])
+
+        // Sends a response to indicate the loader has been successfully shown.
+        // This response includes the request ID (r), event string (e),
+        // and accompanying data (d) with a success indicator.
+        // It is useful for notifying other parts of the application or
+        // external systems that the loading screen is actively displayed.
+        webView.sendResponse(requestID: r, event: e, data: ["success": true])
     }
 }

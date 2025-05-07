@@ -15,12 +15,12 @@
 // presumably the main screen of the application that manages the
 // web view and loading animations.
 extension App {
-    
+
     // The loaderHide() method is a function that encapsulates the
     // logic to hide the loading screen (loaderApp). This method
     // utilizes the hide function of loaderApp, which contains the UI
     // logic for removing the loader from view.
-    
+
     // Hiding the loader is often necessary after the main content
     // (like a web page) has finished loading, providing a clean
     // transition from the loading screen to the content screen.
@@ -32,7 +32,12 @@ extension App {
         // fade out the loader view before removing it from the
         // superview, ensuring a smooth transition for the user.
         loaderApp.hide()
-        
-        sendResponse(requestID: r, event: e, data: ["success": true])
+
+        // Sends a response after hiding the loader. This response
+        // includes a request ID (r), an event string (e), and data
+        // (d) which includes a success indicator.
+        // This is important for communicating the state transition
+        // back to the webview or server.
+        webView.sendResponse(requestID: r, event: e, data: ["success": true])
     }
 }

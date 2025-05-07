@@ -10,7 +10,7 @@ extension App {
         let modalVC = ModalViewController()
         modalManager.open(modal: modalVC, from: self) { data in
             if let result = data as? String {
-                self.sendResponse(
+                self.webView.sendResponse(
                     requestID: r,
                     event: e,
                     data: ["text": result]

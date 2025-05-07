@@ -6,10 +6,18 @@
 //
 
 extension App {
+
+    // Stops the accelerometer updates.
+    // - Parameters:
+    //   - r: The request ID associated with this operation.
+    //   - e: The event name to identify the request.
+    //   - d: The accompanying data payload for the request (not used in this method).
     func accelerometerStop(r: Int, e: String, d: Any) {
 
+        // Check if the accelerometer hardware is available.
         if !accelerometerManager.isAvailable() {
-            sendError(
+            // If unavailable, send an error response indicating the unavailability of the accelerometer.
+            webView.sendError(
                 requestID: r,
                 event: e,
                 key: "ACCELEROMETER_NOT_AVAILABLE",
@@ -18,9 +26,10 @@ extension App {
             return
         }
 
-        var isSuccess = accelerometerManager.stop()
+        // Attempt to stop the accelerometer updates and capture the success status.
+        let isSuccess = accelerometerManager.stop()
 
-        sendResponse(requestID: r, event: e, data: ["success": isSuccess])
-
+        // Send a response back to the requester indicating whether stopping the updates was successful.
+        webView.sendResponse(requestID: r, event: e, data: ["success": isSuccess])
     }
 }

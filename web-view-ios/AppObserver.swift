@@ -54,19 +54,19 @@ class AppObserver {
     }
 
     @objc func appDidEnterBackground() {
-        app.sendResponse(requestID: 0, event: "app.background", data: [:])
+        app.webView.sendResponse(requestID: 0, event: "app.background", data: [:])
     }
 
     @objc func appWillEnterForeground() {
-        app.sendResponse(requestID: 0, event: "app.foreground", data: [:])
+        app.webView.sendResponse(requestID: 0, event: "app.foreground", data: [:])
     }
 
     @objc func appDidBecomeActive() {
-        app.sendResponse(requestID: 0, event: "app.active", data: [:])
+        app.webView.sendResponse(requestID: 0, event: "app.active", data: [:])
     }
 
     @objc func appWillResignActive() {
-        app.sendResponse(requestID: 0, event: "app.inactive", data: [:])
+        app.webView.sendResponse(requestID: 0, event: "app.inactive", data: [:])
     }
 
     @objc func localeDidChange() {
