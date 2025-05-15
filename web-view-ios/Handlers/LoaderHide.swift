@@ -5,6 +5,8 @@
 //  Created by Артур Гетьман on 09.05.2025.
 //
 
+import SwiftUI
+
 // The LoaderHide class implements the WebViewEventHandler protocol
 // to manage requests for hiding a loading indicator within the app.
 // Triggered by web events, it communicates with the loader service
@@ -31,9 +33,10 @@ class LoaderHide: WebViewEventHandler {
     // the loader service to perform the action, then reports the
     // success or failure back to the web context.
     func handle(r: Int, e: String, d: Any) {
+        
         // Attempt to hide the loader via the service.
         let success = services.loader.hide()
-        
+
         // Send a response back to the requester indicating whether
         // hiding the loader was successful.
         controller.sendResponse(r, e, ["success": success])

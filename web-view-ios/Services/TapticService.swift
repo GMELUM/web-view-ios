@@ -1,5 +1,5 @@
 //
-//  Taptic.swift
+//  TapticService.swift
 //  webview-app
 //
 //  Created by Артур Гетьман on 09.05.2025.
@@ -21,7 +21,6 @@ final class TapticService: ObservableObject {
 
         // Maps the custom ImpactStyle to the corresponding UIImpactFeedbackGenerator.FeedbackStyle.
         var feedbackStyle: UIImpactFeedbackGenerator.FeedbackStyle {
-            print(self)  // Debug: Print the selected impact style
             switch self {
             case .light: return .light
             case .medium: return .medium

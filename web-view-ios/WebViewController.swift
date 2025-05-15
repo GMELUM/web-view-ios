@@ -23,7 +23,7 @@ class WebViewController: ObservableObject {
 
     // The executeMethod specifies the JavaScript method to call
     // when sending responses or errors back to the web context.
-    private var executeMethod = "window._nativeapp_receive"
+    private var executeMethod = "window.__nr"
 
     // Sends a structured response back to the web page by executing JavaScript.
     // Accepts a requestID to correlate responses, an event string, and additional data.

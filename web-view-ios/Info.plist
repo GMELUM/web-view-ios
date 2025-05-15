@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>WebViewHeaders</key>
+	<dict>
+		<key>X-Requested-With</key>
+		<string>elum.web-view-ios</string>
+		<key>Referer</key>
+		<string>https://dev.elum.app</string>
+		<key>Origin</key>
+		<string>https://dev.elum.app</string>
+	</dict>
+	<key>WebViewVersionURL</key>
+	<string>https://wv.elum.app/version.json</string>
+	<key>WebViewURL</key>
+	<string>https://dev.elum.app/front</string>
+</dict>
+</plist>

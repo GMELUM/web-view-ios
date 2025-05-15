@@ -30,7 +30,6 @@ final class ModalService: ObservableObject {
     func close(with data: Any? = nil) {
         onHandler?(data)
         currentModal = nil
-        
     }
 
 }

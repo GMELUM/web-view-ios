@@ -19,7 +19,7 @@ struct Main: View {
 
     // StateObject instances to manage the WebViewController and app services.
     @StateObject private var wc = WebViewController()
-    
+
     @EnvironmentObject private var services: Services
 
     // Publishers for observing app lifecycle and locale change notifications.
@@ -42,19 +42,33 @@ struct Main: View {
     var body: some View {
         ZStack {
             // Integrates WebView to display web content within the app's main view.
-            WebView(
-                url: URL(string: "https://dev.elum.app/front")!,
-                controller: wc,
-                services: services
-            )
+            if let url = services.staticCache.launchURL {
+                WebView(
+                    url: url,
+                    controller: wc,
+                    services: services
+                )
+            }
 
             // Displays a loading indicator managed by the services.
             Loader(isVisible: $services.loader.isVisible)
+
+            NotificationContainer()
+
         }
         .sheet(item: $services.modal.currentModal) { modal in
             modal.view
         }
         .edgesIgnoringSafeArea(.all)  // Extends view beyond safe area boundaries
+        .onAppear {
+            services.staticCache.onNewVersionDownloaded = {
+                self.services.popup.add(
+                    title: "notification.background.update.title",
+                    message: "notification.background.update.message"
+                )
+            }
+            services.staticCache.checkAndUpdateCache()
+        }
         .onReceive(didEnterBackground) { _ in
             wc.sendResponse(0, "app.background", [:])  // React to app entering background
         }
@@ -77,6 +91,7 @@ struct Main: View {
             let appInfo = services.app.info()
             wc.sendResponse(0, "app.update", appInfo)
         }
+
     }
 }
 

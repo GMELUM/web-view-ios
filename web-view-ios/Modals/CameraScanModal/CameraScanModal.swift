@@ -2,8 +2,6 @@ import AVFoundation
 import AudioToolbox
 import SwiftUI
 
-
-
 struct CameraScanModal: View {
 
     var modalID: String = "cameraScanModal"
@@ -11,21 +9,21 @@ struct CameraScanModal: View {
     @EnvironmentObject var services: Services
     @Environment(\.presentationMode) var presentationMode
     @State private var scanAreaFrame: CGRect = .zero
-    @State private var scannedCode: String? = nil  // State to hold the result
+    @State private var scannedCode: String? = nil
     private let scanAreaSize: CGFloat = 250
 
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Button("Close") {
-                    scannedCode = nil  // Reset or define it with the needed value
+                Button(LocalizedStringKey("modal.scanqr.button.close")) {
+                    scannedCode = nil
                     presentationMode.wrappedValue.dismiss()
                 }
                 .foregroundColor(.blue)
 
                 Spacer()
 
-                Text("Scan QR Code")
+                Text(LocalizedStringKey("modal.scanqr.header.title"))
                     .font(.headline)
 
                 Spacer()
@@ -50,7 +48,7 @@ struct CameraScanModal: View {
                 CameraScanOverlay(cutoutSize: scanAreaSize)
 
                 VStack {
-                    Text("Align QR code within frame to scan")
+                    Text(LocalizedStringKey("modal.scanqr.clue"))
                         .foregroundColor(.secondary)
                         .padding(.bottom, 20)
                     Spacer()

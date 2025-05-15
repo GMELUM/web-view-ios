@@ -30,6 +30,8 @@ class CameraScan: WebViewEventHandler {
             if let scanned = result as? String {
                 print("Scanned result: \(scanned)")
                 self.controller.sendResponse(r, e, ["text": scanned])
+            } else {
+                self.controller.sendResponse(r, e, ["text": ""])
             }
         }
 

@@ -1,11 +1,12 @@
 //
-//  App.swift
+//  AppService.swift
 //  webview-app
 //
 //  Created by Артур Гетьман on 09.05.2025.
 //
 
 import Combine
+import Foundation
 import SwiftUI
 
 // The AppService class is an ObservableObject designed to provide
@@ -20,8 +21,29 @@ final class AppService: ObservableObject {
     //   the current language code and UI appearance scheme, respectively.
     func info() -> [String: Any] {
         return [
-            "language": getLanguage(), // Fetch the current language setting
-            "scheme": getScheme(), // Determine the current user interface style
+            "language": getLanguage(),  // Fetch the current language setting
+            "scheme": getScheme(),  // Determine the current user interface style
+        ]
+    }
+
+    func getAppVersion() -> [String: Any] {
+        // Получение словаря инфо-плист
+        if let infoDictionary = Bundle.main.infoDictionary {
+            // Извлечение версии приложения (CFBundleShortVersionString)
+            let version =
+                infoDictionary["CFBundleShortVersionString"] as? String
+                ?? "Unknown"
+            // Извлечение номера сборки приложения (CFBundleVersion)
+            let build =
+                infoDictionary["CFBundleVersion"] as? String ?? "Unknown"
+            return [
+                "version": version,
+                "build": build,
+            ]
+        }
+        return [
+            "version": "0.0.0",
+            "build": "0.0.0",
         ]
     }
 
@@ -37,7 +59,8 @@ final class AppService: ObservableObject {
     // - Returns: A string indicating the current appearance scheme.
     private func getScheme() -> String {
         // Check the device's current appearance mode
-        let userInterfaceStyle = UIScreen.main.traitCollection.userInterfaceStyle
+        let userInterfaceStyle = UIScreen.main.traitCollection
+            .userInterfaceStyle
         let theme: String
         switch userInterfaceStyle {
         case .light:

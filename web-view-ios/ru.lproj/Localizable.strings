@@ -1,0 +1,16 @@
+//
+//  Localization.strings
+//  web-view-ios
+//
+//  Created by Артур Гетьман on 15.05.2025.
+//
+
+"modal.scanqr.button.close" = "Закрыть";
+"modal.scanqr.header.title" = "Сканировать QR код";
+"modal.scanqr.clue" = "Поместите рамку на QR-код";
+
+"notification.successfully.update.title" = "Успешно обновлено";
+"notification.successfully.update.description" = "Установлена ​​последняя версия приложения";
+
+"notification.background.update.title" = "Приложение обновлено";
+"notification.background.update.message" = "Мы обновили приложение в фоновом режиме. Перезапустите его, чтобы применить изменения.";

@@ -37,6 +37,7 @@ class WebViewEvent {
 
         AppInfo.self,
         AppStart.self,
+        AppVersion.self,
         
         CameraScan.self,
 
@@ -48,16 +49,20 @@ class WebViewEvent {
 
         LoaderShow.self,
         LoaderHide.self,
+        
+        PopupNotification.self,
 
         TapticImpact.self,
         TapticNotification.self,
         TapticSelection.self,
+        
+        ScreenIdleTimerOn.self,
+        ScreenIdleTimerOff.self,
 
         StorageGet.self,
         StorageSet.self,
         StorageDelete.self,
         StorageKeys.self,
-        
 
     ]
 

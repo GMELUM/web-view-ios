@@ -12,9 +12,14 @@ import SwiftUI
 
 @main
 struct web_view_iosApp: App {
-    
+
     @StateObject private var services = Services()
-    
+
+    init() {
+        // Register the custom URL protocol
+        URLProtocol.registerClass(CustomURLProtocol.self)
+    }
+
     // The body property of the App protocol contains the scene(s) that
     // determine the layout and behavior of the application at runtime.
     var body: some Scene {

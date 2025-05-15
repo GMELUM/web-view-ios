@@ -31,14 +31,21 @@ class AppStart: WebViewEventHandler {
     // retrieves application information and updates the web context,
     // then hides the loader and informs the web of successful completion.
     func handle(r: Int, e: String, d: Any) {
-        
+
         // Retrieve application information and convey it to the web context.
         let appInfo = services.app.info()
         controller.sendResponse(0, "app.update", appInfo)
-        
+
         // Hide the loader as part of the app startup sequence.
         let success = services.loader.hide()
-        
+
+        if services.staticCache.isInstalledNewVersion {
+            services.popup.add(
+                title: "notification.successfully.update.title",
+                message: "notification.successfully.update.description"
+            )
+        }
+
         // Send a response back to the requester, indicating if the operation was successful.
         controller.sendResponse(r, e, ["success": success])
     }
