@@ -18,7 +18,7 @@
 		4B782C832DD03E6B001D3016 /* Exceptions for "web-view-ios" folder in "web-view-ios" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"/Localized: Localizable.strings",
+				"/Localized: Localizable/Localizable.strings",
 				Info.plist,
 			);
 			target = 4B289BD72DCEF4B50088C8D2 /* web-view-ios */;
@@ -30,7 +30,7 @@
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = 4B289BD42DCEF4B50088C8D2 /* Sources */;
 			membershipExceptions = (
-				"/Localized: Localizable.strings",
+				"/Localized: Localizable/Localizable.strings",
 			);
 		};
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
