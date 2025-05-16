@@ -115,7 +115,7 @@ struct NotificationView: View {
             Spacer()
         }
         .padding()
-        .background(Color(.secondarySystemBackground))
+        .background(.regularMaterial)
         .cornerRadius(16)
         .shadow(radius: 5)
         .frame(maxWidth: .infinity)
@@ -242,7 +242,7 @@ struct NotificationView: View {
     private func cancelTimer() {
         timerWorkItem?.cancel()
         timerWorkItem = nil
-        timerStarted = false // <--- важно!
+        timerStarted = false
     }
 
 }

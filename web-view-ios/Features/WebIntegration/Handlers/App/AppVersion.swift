@@ -37,7 +37,7 @@ class AppVersion: WebViewEventHandler {
     func handle(r: Int, e: String, d: Any) {
         
         // Retrieve app version and build information through the services.
-        let data = services.app.getAppVersion()
+        let data = services.systemInfo.getAppVersion()
 
         // Send the retrieved version information back as a response.
         controller.sendResponse(r, e, data)

@@ -23,6 +23,8 @@ struct NotificationContainer: View {
                 UIApplication.shared.connectedScenes
                 .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
                 .first { $0.isKeyWindow }?.safeAreaInsets.top ?? 0
+            
+            
 
             ZStack {
 

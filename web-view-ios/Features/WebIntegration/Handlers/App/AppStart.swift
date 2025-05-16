@@ -33,7 +33,7 @@ class AppStart: WebViewEventHandler {
     func handle(r: Int, e: String, d: Any) {
 
         // Retrieve application information and convey it to the web context.
-        let appInfo = services.app.info()
+        let appInfo = services.systemInfo.info()
         controller.sendResponse(0, "app.update", appInfo)
 
         // Hide the loader as part of the app startup sequence.

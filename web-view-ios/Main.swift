@@ -83,12 +83,12 @@ struct Main: View {
         }
         .onReceive(localeDidChange) { _ in
             // Updates app information in response to locale changes.
-            let appInfo = services.app.info()
+            let appInfo = services.systemInfo.info()
             wc.sendResponse(0, "app.update", appInfo)
         }
         .onChange(of: colorScheme) { newColorScheme in
             // Sends updated app info to reflect theme changes.
-            let appInfo = services.app.info()
+            let appInfo = services.systemInfo.info()
             wc.sendResponse(0, "app.update", appInfo)
         }
 

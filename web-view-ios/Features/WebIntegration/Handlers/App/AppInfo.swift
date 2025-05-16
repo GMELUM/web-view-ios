@@ -31,10 +31,10 @@ class AppInfo: WebViewEventHandler {
     // It interacts with service components to fetch data
     // and communicates success to the web context.
     func handle(r: Int, e: String, d: Any) {
-        // Attempt to hide the loader service as part of the operation.
-        let success = services.loader.hide()
         
-        // Send a response back to the requester indicating the result of the operation.
-        controller.sendResponse(r, e, ["success": success])
+        // Retrieve application information and convey it to the web context.
+        let appInfo = services.systemInfo.info()
+        controller.sendResponse(r, e, appInfo)
+        
     }
 }

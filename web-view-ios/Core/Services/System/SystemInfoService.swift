@@ -14,7 +14,7 @@ import SwiftUI
 // such as the current language and user interface style, offering
 // these details when requested by clients or other components.
 
-final class AppService: ObservableObject {
+final class SystemInfoService: ObservableObject {
 
     // Provides a dictionary containing current application metadata.
     // - Returns: A dictionary with keys "language" and "scheme" representing

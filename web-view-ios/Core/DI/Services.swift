@@ -19,7 +19,7 @@ final class Services: ObservableObject {
     // SwiftUI views to react to any changes within the services.
 
     @Published var accelerometer = AccelerometerService()
-    @Published var app = AppService()
+    @Published var systemInfo = SystemInfoService()
     @Published var flash = FlashService()
     @Published var gyroscope = GyroscopeService()
     @Published var loader = LoaderService()
